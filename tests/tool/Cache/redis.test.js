@@ -71,9 +71,9 @@ describe("redis", async () => {
   });
 
   /**
-   * * e1 -> []
+   * * [] <- e1
    * * [e1]
-   * * e2 -> [e1]
+   * * [e1] <- e2
    * * [e1, e2]
    */
   it("push to list from right", async () => {
