@@ -12,7 +12,8 @@
     "decimal.js": "^10.4.3",
     "dotenv": "^16.4.5",
     "express": "^4.18.3",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "redis": "^4.6.13"
   },
   "devDependencies": {
     "nodemon": "^3.1.0",
