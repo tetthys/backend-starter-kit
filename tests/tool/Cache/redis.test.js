@@ -1,10 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { createClient } from "redis";
 import delay from "../../../src/helper/delay/delay";
-
-const getUniqueString = () => {
-  return String(Math.random());
-};
+import getUniqueString from "./utils/getUniqueString";
 
 describe("redis", async () => {
   const redis = await createClient().connect();
