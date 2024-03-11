@@ -19,6 +19,13 @@ describe("Cache", () => {
     expect(await new Cache().get(key)).toEqual(valueObject);
   });
 
+  it("set return value", async () => {
+    const key = getUniqueString();
+    const value = getUniqueString();
+
+    expect(await new Cache().set(key, value)).toBe(value);
+  });
+
   it("set for one minute", async () => {
     const key = getUniqueString();
     const value = getUniqueString();

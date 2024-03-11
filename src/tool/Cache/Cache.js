@@ -19,6 +19,8 @@ export default class Cache {
       default:
         await redis.set(key, JSON.stringify(value));
     }
+
+    return value;
   }
 
   async get(key) {
