@@ -8,27 +8,27 @@ export default class Cache {
 
     switch (this.#for) {
       case "forOneMinute":
-        await redis.setEx(key, 60, value);
+        await redis.setEx(key, 60, JSON.stringify(value));
         break;
       case "forOneHour":
-        await redis.setEx(key, 60 * 60, value);
+        await redis.setEx(key, 60 * 60, JSON.stringify(value));
         break;
       case "forOneDay":
-        await redis.setEx(key, 60 * 60 * 24, value);
+        await redis.setEx(key, 60 * 60 * 24, JSON.stringify(value));
         break;
       default:
-        await redis.set(key, value);
+        await redis.set(key, JSON.stringify(value));
     }
   }
 
   async get(key) {
     const redis = await createClient().connect();
-    return await redis.get(key);
+    return JSON.parse(await redis.get(key));
   }
 
   async getIfNot(key, callback) {
     const redis = await createClient().connect();
-    const value = await redis.get(key);
+    const value = JSON.parse(await redis.get(key));
     return value ? value : await callback();
   }
 

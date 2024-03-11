@@ -11,6 +11,14 @@ describe("Cache", () => {
     expect(await new Cache().get(key)).toBe(value);
   });
 
+  it("set as json, get as object", async () => {
+    const key = getUniqueString();
+    const valueObject = { name: "John Doe" };
+
+    await new Cache().set(key, valueObject);
+    expect(await new Cache().get(key)).toEqual(valueObject);
+  });
+
   it("set for one minute", async () => {
     const key = getUniqueString();
     const value = getUniqueString();
