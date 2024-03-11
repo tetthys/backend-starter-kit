@@ -1,24 +1,48 @@
 import { describe, it, expect } from "vitest";
+import getUniqueString from "./utils/getUniqueString";
 import Cache from "../../../src/tool/Cache/Cache";
 
-/**
- * 내가 원하는 인터페이스는 :
- *
- * Haven.Cache().set('key', 'value')
- * Haven.Cache().get('key')
- *
- * Haven.Cache().set('key', 'value').forOneMinute()
- * Haven.Cache().set('key', 'value').forOneHour()
- * Haven.Cache().set('key', 'value').forOneDay()
- * Haven.Cache().set('key', 'value').rememberForever()
- *
- * Haven.Cache().get('key').ifNotFound(() => {
- * * do something
- * })
- */
-
 describe("Cache", () => {
-  it("true", async () => {
-    expect(true).toBe(true);
+  it("set key and get key", async () => {
+    const key = getUniqueString();
+    const value = getUniqueString();
+
+    await new Cache().set(key, value);
+    expect(await new Cache().get(key)).toBe(value);
+  });
+
+  it("set for one minute", async () => {
+    const key = getUniqueString();
+    const value = getUniqueString();
+
+    await new Cache().forOneMinute().set(key, value);
+    expect(await new Cache().get(key)).toBe(value);
+  });
+
+  it("set for one hour", async () => {
+    const key = getUniqueString();
+    const value = getUniqueString();
+
+    await new Cache().forOneHour().set(key, value);
+    expect(await new Cache().get(key)).toBe(value);
+  });
+
+  it("set for one day", async () => {
+    const key = getUniqueString();
+    const value = getUniqueString();
+
+    await new Cache().forOneDay().set(key, value);
+    expect(await new Cache().get(key)).toBe(value);
+  });
+
+  it("getIfNot", async () => {
+    const key = getUniqueString();
+    const value = getUniqueString();
+
+    await new Cache().getIfNot(key, async () => {
+      await new Cache().set(key, value);
+    });
+
+    expect(await new Cache().get(key)).toBe(value);
   });
 });
