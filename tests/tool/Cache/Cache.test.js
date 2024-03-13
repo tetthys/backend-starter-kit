@@ -19,6 +19,26 @@ describe("Cache", () => {
     expect(await new Cache().get(key)).toEqual(valueObject);
   });
 
+  it("get executes callback if value is undefined", async () => {
+    const key = getUniqueString();
+    const value = getUniqueString();
+
+    const result = await new Cache().get(
+      key,
+      async () => await new Cache().forOneMinute().set(key, value)
+    );
+
+    expect(result).toBe(value);
+  });
+
+  it("get return null if value is null and callback doesn't exist", async () => {
+    const key = getUniqueString();
+
+    const result = await new Cache().get(key);
+
+    expect(result).toBe(null);
+  });
+
   it("set return value", async () => {
     const key = getUniqueString();
     const value = getUniqueString();
@@ -47,17 +67,6 @@ describe("Cache", () => {
     const value = getUniqueString();
 
     await new Cache().forOneDay().set(key, value);
-    expect(await new Cache().get(key)).toBe(value);
-  });
-
-  it("getIfNot", async () => {
-    const key = getUniqueString();
-    const value = getUniqueString();
-
-    await new Cache().getIfNot(key, async () => {
-      await new Cache().set(key, value);
-    });
-
     expect(await new Cache().get(key)).toBe(value);
   });
 });

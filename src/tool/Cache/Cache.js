@@ -23,15 +23,10 @@ export default class Cache {
     return value;
   }
 
-  async get(key) {
+  async get(key, callback = undefined) {
     const redis = await createClient().connect();
-    return JSON.parse(await redis.get(key));
-  }
-
-  async getIfNot(key, callback) {
-    const redis = await createClient().connect();
-    const value = JSON.parse(await redis.get(key));
-    return value ? value : await callback();
+    const value = await redis.get(key);
+    return value === null && callback ? await callback() : JSON.parse(value);
   }
 
   forOneMinute() {
