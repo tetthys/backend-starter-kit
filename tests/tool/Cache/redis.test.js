@@ -1,10 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { createClient } from "redis";
+import { Redis } from "ioredis";
 import delay from "../../../src/helper/delay/delay";
 import getUniqueString from "./utils/getUniqueString";
 
 describe("redis", async () => {
-  const redis = await createClient().connect();
+  const redis = new Redis();
 
   it("set key and get key", async () => {
     const key = getUniqueString();
@@ -38,7 +38,7 @@ describe("redis", async () => {
     const key = getUniqueString();
     const value = getUniqueString();
 
-    await redis.setEx(key, 1, value);
+    await redis.setex(key, 1, value);
 
     const before = await redis.get(key);
     expect(before).toBeTruthy();
@@ -60,10 +60,10 @@ describe("redis", async () => {
     const value1 = getUniqueString();
     const value2 = getUniqueString();
 
-    await redis.lPush(key, value1);
-    await redis.lPush(key, value2);
+    await redis.lpush(key, value1);
+    await redis.lpush(key, value2);
 
-    const result = await redis.lRange(key, 0, -1);
+    const result = await redis.lrange(key, 0, -1);
     expect(result).toEqual([value2, value1]);
   });
 
@@ -78,10 +78,10 @@ describe("redis", async () => {
     const value1 = getUniqueString();
     const value2 = getUniqueString();
 
-    await redis.rPush(key, value1);
-    await redis.rPush(key, value2);
+    await redis.rpush(key, value1);
+    await redis.rpush(key, value2);
 
-    const result = await redis.lRange(key, 0, -1);
+    const result = await redis.lrange(key, 0, -1);
     expect(result).toEqual([value1, value2]);
   });
 
@@ -90,13 +90,13 @@ describe("redis", async () => {
     const value1 = getUniqueString();
     const value2 = getUniqueString();
 
-    await redis.lPush(key, value1);
-    await redis.lPush(key, value2);
+    await redis.lpush(key, value1);
+    await redis.lpush(key, value2);
 
-    const result1 = await redis.lPop(key);
+    const result1 = await redis.lpop(key);
     expect(result1).toBe(value2);
 
-    const result2 = await redis.lPop(key);
+    const result2 = await redis.lpop(key);
     expect(result2).toBe(value1);
   });
 
@@ -105,13 +105,13 @@ describe("redis", async () => {
     const value1 = getUniqueString();
     const value2 = getUniqueString();
 
-    await redis.lPush(key, value1);
-    await redis.lPush(key, value2);
+    await redis.lpush(key, value1);
+    await redis.lpush(key, value2);
 
-    const result1 = await redis.rPop(key);
+    const result1 = await redis.rpop(key);
     expect(result1).toBe(value1);
 
-    const result2 = await redis.rPop(key);
+    const result2 = await redis.rpop(key);
     expect(result2).toBe(value2);
   });
 
@@ -119,10 +119,10 @@ describe("redis", async () => {
     const key = getUniqueString();
     const value = getUniqueString();
 
-    await redis.sAdd(key, value);
-    await redis.sAdd(key, value);
+    await redis.sadd(key, value);
+    await redis.sadd(key, value);
 
-    const result = await redis.sMembers(key);
+    const result = await redis.smembers(key);
     expect(result).toEqual([value]);
   });
 
@@ -131,9 +131,9 @@ describe("redis", async () => {
     const field = "field" + getUniqueString();
     const value = "value" + getUniqueString();
 
-    await redis.hSet(key, field, value);
+    await redis.hset(key, field, value);
 
-    const result = await redis.hGet(key, field);
+    const result = await redis.hget(key, field);
     expect(result).toBe(value);
   });
 });
