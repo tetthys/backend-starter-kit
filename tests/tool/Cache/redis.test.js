@@ -1,18 +1,16 @@
 import { describe, it, expect } from "vitest";
-import { Redis } from "ioredis";
 import delay from "../../../src/helper/delay/delay";
 import getUniqueString from "./utils/getUniqueString";
+import Haven from "../../../src/tool/Haven/Haven";
 
 describe("redis", async () => {
-  const redis = new Redis();
-
   it("set key and get key", async () => {
     const key = getUniqueString();
     const value = getUniqueString();
 
-    await redis.set(key, value);
+    await Haven.Redis().set(key, value);
 
-    const result = await redis.get(key);
+    const result = await Haven.Redis().get(key);
 
     expect(result).toBe(value);
   });
@@ -21,16 +19,16 @@ describe("redis", async () => {
     const key = getUniqueString();
     const value = getUniqueString();
 
-    await redis.set(key, value);
+    await Haven.Redis().set(key, value);
 
-    await redis.expire(key, 1);
+    await Haven.Redis().expire(key, 1);
 
-    const before = await redis.get(key);
+    const before = await Haven.Redis().get(key);
     expect(before).toBeTruthy();
 
     await delay(1 * 1000);
 
-    const after = await redis.get(key);
+    const after = await Haven.Redis().get(key);
     expect(after).toBeFalsy();
   });
 
@@ -38,14 +36,14 @@ describe("redis", async () => {
     const key = getUniqueString();
     const value = getUniqueString();
 
-    await redis.setex(key, 1, value);
+    await Haven.Redis().setex(key, 1, value);
 
-    const before = await redis.get(key);
+    const before = await Haven.Redis().get(key);
     expect(before).toBeTruthy();
 
     await delay(1 * 1000);
 
-    const after = await redis.get(key);
+    const after = await Haven.Redis().get(key);
     expect(after).toBeFalsy();
   });
 
@@ -60,10 +58,10 @@ describe("redis", async () => {
     const value1 = getUniqueString();
     const value2 = getUniqueString();
 
-    await redis.lpush(key, value1);
-    await redis.lpush(key, value2);
+    await Haven.Redis().lpush(key, value1);
+    await Haven.Redis().lpush(key, value2);
 
-    const result = await redis.lrange(key, 0, -1);
+    const result = await Haven.Redis().lrange(key, 0, -1);
     expect(result).toEqual([value2, value1]);
   });
 
@@ -78,10 +76,10 @@ describe("redis", async () => {
     const value1 = getUniqueString();
     const value2 = getUniqueString();
 
-    await redis.rpush(key, value1);
-    await redis.rpush(key, value2);
+    await Haven.Redis().rpush(key, value1);
+    await Haven.Redis().rpush(key, value2);
 
-    const result = await redis.lrange(key, 0, -1);
+    const result = await Haven.Redis().lrange(key, 0, -1);
     expect(result).toEqual([value1, value2]);
   });
 
@@ -90,13 +88,13 @@ describe("redis", async () => {
     const value1 = getUniqueString();
     const value2 = getUniqueString();
 
-    await redis.lpush(key, value1);
-    await redis.lpush(key, value2);
+    await Haven.Redis().lpush(key, value1);
+    await Haven.Redis().lpush(key, value2);
 
-    const result1 = await redis.lpop(key);
+    const result1 = await Haven.Redis().lpop(key);
     expect(result1).toBe(value2);
 
-    const result2 = await redis.lpop(key);
+    const result2 = await Haven.Redis().lpop(key);
     expect(result2).toBe(value1);
   });
 
@@ -105,13 +103,13 @@ describe("redis", async () => {
     const value1 = getUniqueString();
     const value2 = getUniqueString();
 
-    await redis.lpush(key, value1);
-    await redis.lpush(key, value2);
+    await Haven.Redis().lpush(key, value1);
+    await Haven.Redis().lpush(key, value2);
 
-    const result1 = await redis.rpop(key);
+    const result1 = await Haven.Redis().rpop(key);
     expect(result1).toBe(value1);
 
-    const result2 = await redis.rpop(key);
+    const result2 = await Haven.Redis().rpop(key);
     expect(result2).toBe(value2);
   });
 
@@ -119,10 +117,10 @@ describe("redis", async () => {
     const key = getUniqueString();
     const value = getUniqueString();
 
-    await redis.sadd(key, value);
-    await redis.sadd(key, value);
+    await Haven.Redis().sadd(key, value);
+    await Haven.Redis().sadd(key, value);
 
-    const result = await redis.smembers(key);
+    const result = await Haven.Redis().smembers(key);
     expect(result).toEqual([value]);
   });
 
@@ -131,9 +129,9 @@ describe("redis", async () => {
     const field = "field" + getUniqueString();
     const value = "value" + getUniqueString();
 
-    await redis.hset(key, field, value);
+    await Haven.Redis().hset(key, field, value);
 
-    const result = await redis.hget(key, field);
+    const result = await Haven.Redis().hget(key, field);
     expect(result).toBe(value);
   });
 });
