@@ -1,3 +1,4 @@
+import json from "../../helper/json/json";
 import Haven from "../Haven/Haven";
 
 export default class Cache {
@@ -6,16 +7,16 @@ export default class Cache {
   async set(key, value) {
     switch (this.#for) {
       case "forOneMinute":
-        await Haven.Redis().setex(key, 60, JSON.stringify(value));
+        await Haven.Redis().setex(key, 60, json(value));
         break;
       case "forOneHour":
-        await Haven.Redis().setex(key, 60 * 60, JSON.stringify(value));
+        await Haven.Redis().setex(key, 60 * 60, json(value));
         break;
       case "forOneDay":
-        await Haven.Redis().setex(key, 60 * 60 * 24, JSON.stringify(value));
+        await Haven.Redis().setex(key, 60 * 60 * 24, json(value));
         break;
       default:
-        await Haven.Redis().set(key, JSON.stringify(value));
+        await Haven.Redis().set(key, json(value));
     }
 
     return value;
