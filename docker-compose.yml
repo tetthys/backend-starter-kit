@@ -1,0 +1,9 @@
+services:
+  node:
+    container_name: backend-node
+    build:
+      context: './dockerimages/node/22'
+    volumes:
+      - .:/app
+    stdin_open: true
+    tty: true

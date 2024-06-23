@@ -1,0 +1,11 @@
+{
+    "name": "backend-starter-kit",
+    "version": "0.0.1",
+    "description": "backend starter kit with rich features!",
+    "scripts": {
+        "test": "vitest"
+    },
+    "devDependencies": {
+        "vitest": "^1.6.0"
+    }
+}
