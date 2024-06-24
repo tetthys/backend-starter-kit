@@ -1,1 +1,7 @@
-console.log("HELLO WORLD");
+import express from "express";
+
+const app = express();
+
+app.get("/hello", (req, res) => {
+  res.send("hello");
+});
