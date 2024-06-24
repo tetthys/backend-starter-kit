@@ -4,6 +4,7 @@ import Head from "../../src/Stubs/Head";
 import Eye from "../../src/Stubs/Eye";
 import Nose from "../../src/Stubs/Nose";
 import Mouth from "../../src/Stubs/Mouth";
+import Teeth from "../../src/Stubs/Teeth";
 
 describe("Container", () => {
   it("returns Head instance with correct members", () => {
@@ -11,5 +12,6 @@ describe("Container", () => {
     expect(head.eye).toBeInstanceOf(Eye);
     expect(head.nose).toBeInstanceOf(Nose);
     expect(head.mouth).toBeInstanceOf(Mouth);
+    expect(head.mouth.teeth).toBeInstanceOf(Teeth);
   });
 });
