@@ -1,5 +1,5 @@
 export default class Container {
-  resolve(className) {
+  static resolve(className) {
     return new className(
       ...className.injectables.map((injectable) => new injectable())
     );
