@@ -23,12 +23,12 @@ export default class Container {
   static resolve(className) {
     if (this.hasBindingMethod(className))
       return this.resolveWithBindingMethod(className);
-    return className.injectables && className.injectables.length > 0
+    return className.injectables?.length > 0
       ? new className(
           ...className.injectables.map((injectable) => {
             if (this.hasBindingMethod(injectable))
               return this.resolveWithBindingMethod(injectable);
-            return injectable.injectables && injectable.injectables.length > 0
+            return injectable.injectables?.length > 0
               ? Container.resolve(injectable)
               : new injectable();
           })
