@@ -14,4 +14,12 @@ describe("Container", () => {
     expect(head.mouth).toBeInstanceOf(Mouth);
     expect(head.mouth.teeth).toBeInstanceOf(Teeth);
   });
+
+  it("binds how to resolve", () => {
+    Container.bind(Nose, () => {
+      return new Eye();
+    });
+    const nose = Container.resolve(Nose);
+    expect(nose).toBeInstanceOf(Eye);
+  });
 });
