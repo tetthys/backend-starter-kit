@@ -15,11 +15,22 @@ describe("Container", () => {
     expect(head.mouth.teeth).toBeInstanceOf(Teeth);
   });
 
-  it("binds how to resolve", () => {
+  it("tests binding", () => {
     Container.bind(Nose, () => {
       return new Eye();
     });
     const nose = Container.resolve(Nose);
     expect(nose).toBeInstanceOf(Eye);
+  });
+
+  it("tests binding in nested injection", () => {
+    Container.bind(Nose, () => {
+      return new Eye();
+    });
+    const head = Container.resolve(Head);
+    expect(head.eye).toBeInstanceOf(Eye);
+    expect(head.nose).toBeInstanceOf(Eye);
+    expect(head.mouth).toBeInstanceOf(Mouth);
+    expect(head.mouth.teeth).toBeInstanceOf(Teeth);
   });
 });
