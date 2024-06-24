@@ -12,7 +12,7 @@ describe("Container", () => {
     Container.singletones = [];
   });
 
-  it("returns Head instance with correct members", () => {
+  it("resolves instance with nested dependency injection", () => {
     const head = Container.resolve(Head);
     expect(head.eye).toBeInstanceOf(Eye);
     expect(head.nose).toBeInstanceOf(Nose);
@@ -20,21 +20,21 @@ describe("Container", () => {
     expect(head.mouth.teeth).toBeInstanceOf(Teeth);
   });
 
-  it("tests binding", () => {
-    Container.bind(Nose, () => {
-      return new Eye();
+  it("binds", () => {
+    Container.bind(Eye, () => {
+      return new Nose();
     });
-    const nose = Container.resolve(Nose);
-    expect(nose).toBeInstanceOf(Eye);
+    const eye = Container.resolve(Eye);
+    expect(eye).toBeInstanceOf(Nose);
   });
 
-  it("tests binding in nested injection", () => {
-    Container.bind(Nose, () => {
-      return new Eye();
+  it("binds with nested dependency injection", () => {
+    Container.bind(Eye, () => {
+      return new Nose();
     });
     const head = Container.resolve(Head);
-    expect(head.eye).toBeInstanceOf(Eye);
-    expect(head.nose).toBeInstanceOf(Eye);
+    expect(head.eye).toBeInstanceOf(Nose);
+    expect(head.nose).toBeInstanceOf(Nose);
     expect(head.mouth).toBeInstanceOf(Mouth);
     expect(head.mouth.teeth).toBeInstanceOf(Teeth);
   });
@@ -48,7 +48,7 @@ describe("Container", () => {
     expect(nose1).toBe(nose2);
   });
 
-  it("binds to singletone in nested injection", () => {
+  it("binds to singletone with nested dependency injection", () => {
     Container.bindToSingletone(Nose, () => {
       return new Nose();
     });
