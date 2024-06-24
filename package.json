@@ -2,7 +2,9 @@
     "name": "backend-starter-kit",
     "version": "0.0.1",
     "description": "backend starter kit with rich features!",
+    "type": "module",
     "scripts": {
+        "dev": "nodemon src/index.js",
         "test": "vitest"
     },
     "dependencies": {
@@ -10,6 +12,7 @@
         "express": "^4.19.2"
     },
     "devDependencies": {
+        "nodemon": "^3.1.4",
         "vitest": "^1.6.0"
     }
 }
