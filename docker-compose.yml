@@ -5,5 +5,7 @@ services:
       context: './dockerimages/node/22'
     volumes:
       - .:/app
+    ports:
+      - ${PORT}:${PORT}
     stdin_open: true
     tty: true
