@@ -11,6 +11,12 @@ backend starter kit with rich features!
 
 ## Facade
 
+# Folder Structure
+
+## /App
+
+Each is equivalent to an interface.
+
 # Helpers
 
 # Testing Guide
