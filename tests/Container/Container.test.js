@@ -1,10 +1,10 @@
 import { beforeEach, expect } from "vitest";
-import Container from "../../src/Container/Container";
-import Head from "../../src/Stubs/Head";
-import Eye from "../../src/Stubs/Eye";
-import Nose from "../../src/Stubs/Nose";
-import Mouth from "../../src/Stubs/Mouth";
-import Teeth from "../../src/Stubs/Teeth";
+import Container from "../../src/Container/Container.js";
+import Head from "../../src/Stubs/Head.js";
+import Eye from "../../src/Stubs/Eye.js";
+import Nose from "../../src/Stubs/Nose.js";
+import Mouth from "../../src/Stubs/Mouth.js";
+import Teeth from "../../src/Stubs/Teeth.js";
 
 describe("Container", () => {
   beforeEach(() => {

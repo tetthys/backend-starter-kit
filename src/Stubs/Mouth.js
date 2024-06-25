@@ -1,4 +1,4 @@
-import Teeth from "./Teeth";
+import Teeth from "./Teeth.js";
 
 export default class Mouth {
   static injectables = [Teeth];

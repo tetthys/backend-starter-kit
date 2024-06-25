@@ -1,6 +1,6 @@
-import Eye from "./Eye";
-import Mouth from "./Mouth";
-import Nose from "./Nose";
+import Eye from "./Eye.js";
+import Mouth from "./Mouth.js";
+import Nose from "./Nose.js";
 
 export default class Head {
   static injectables = [Eye, Nose, Mouth];

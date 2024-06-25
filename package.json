@@ -1,11 +1,30 @@
 {
-    "name": "backend-starter-kit",
-    "version": "0.0.1",
-    "description": "backend starter kit with rich features!",
-    "scripts": {
-        "test": "vitest"
-    },
-    "devDependencies": {
-        "vitest": "^1.6.0"
-    }
+  "name": "backend-starter-kit",
+  "version": "0.0.1",
+  "description": "backend starter kit with rich features!",
+  "main": "src/index.js",
+  "type": "module",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tetthys/backend-starter-kit.git"
+  },
+  "author": "tetthys",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tetthys/backend-starter-kit/issues"
+  },
+  "homepage": "https://github.com/tetthys/backend-starter-kit#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "vitest": "^1.6.0"
+  }
 }
