@@ -1,4 +1,3 @@
-import { beforeEach, expect } from "vitest";
 import Container from "../../src/Container/Container.js";
 import Head from "../../src/Stubs/Head.js";
 import Eye from "../../src/Stubs/Eye.js";
