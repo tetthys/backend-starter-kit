@@ -1,13 +1,6 @@
-import express from "express";
-import env from "./Helpers/env/env.js";
+import "./Kernel/Booting.js";
+import "./Kernel/RegisterRoutes.js";
+import Container from "./Container/Container.js";
+import Router from "./App/Router.js";
 
-const app = express();
-const port = env("PORT");
-
-app.get("/hello", (req, res) => {
-  res.send("hello");
-});
-
-app.listen(port, () => {
-  console.log("Server is running on port " + port);
-});
+Container.resolve(Router).listen();

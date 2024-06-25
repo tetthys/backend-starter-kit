@@ -7,5 +7,7 @@ export default class Router {
 
   delete(path, callback) {}
 
+  listen(port) {}
+
   getInstance() {}
 }
