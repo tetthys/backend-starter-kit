@@ -1,5 +1,5 @@
 import express from "express";
-import env from "./Helpers/env/env";
+import env from "./Helpers/env/env.js";
 
 const app = express();
 const port = env("PORT");
