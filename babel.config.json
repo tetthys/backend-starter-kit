@@ -1,3 +1,10 @@
 {
-  "presets": ["@babel/preset-env"]
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": false // https://babeljs.io/docs/babel-preset-env#modules
+      }
+    ]
+  ]
 }
