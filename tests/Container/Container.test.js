@@ -16,7 +16,7 @@ describe("Container", () => {
     Container.register([Eye]);
     expect(Container.registry[0]).toEqual({
       tag: "Eye",
-      constructorName: "eye",
+      memberName: "eye",
       className: Eye,
     });
   });
@@ -30,36 +30,36 @@ describe("Container", () => {
     ]);
     expect(Container.registry[0]).toEqual({
       tag: "uniqueEye",
-      constructorName: "eye",
+      memberName: "eye",
       className: Eye,
     });
   });
 
-  it("can be registered object with specified constructorName", () => {
+  it("can be registered object with specified memberName", () => {
     Container.register([
       {
-        constructorName: "uniqueEyeMember",
+        memberName: "uniqueEyeMember",
         className: Eye,
       },
     ]);
     expect(Container.registry[0]).toEqual({
       tag: "Eye",
-      constructorName: "uniqueEyeMember",
+      memberName: "uniqueEyeMember",
       className: Eye,
     });
   });
 
-  it("can be registered object with specified tag, constructorName", () => {
+  it("can be registered object with specified tag, memberName", () => {
     Container.register([
       {
         tag: "uniqueEye",
-        constructorName: "uniqueEyeMember",
+        memberName: "uniqueEyeMember",
         className: Eye,
       },
     ]);
     expect(Container.registry[0]).toEqual({
       tag: "uniqueEye",
-      constructorName: "uniqueEyeMember",
+      memberName: "uniqueEyeMember",
       className: Eye,
     });
   });

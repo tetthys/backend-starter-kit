@@ -7,18 +7,18 @@ export default class Container {
     classNames.forEach((className) => {
       if (
         className.tag === undefined &&
-        className.constructorName === undefined &&
+        className.memberName === undefined &&
         className.className === undefined
       ) {
         this.registry.push({
           tag: className.name,
-          constructorName: className.name.toLowerCase(),
+          memberName: className.name.toLowerCase(),
           className: className,
         });
       } else {
         this.registry.push({
           tag: className.tag || className.className.name,
-          constructorName: className.constructorName || className.className.name.toLowerCase(),
+          memberName: className.memberName || className.className.name.toLowerCase(),
           className: className.className || className.className,
         });
       }
