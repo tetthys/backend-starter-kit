@@ -1,6 +1,29 @@
 export default class Container {
+  static registry = [];
   static bindingMethods = [];
   static singletones = [];
+
+  static register(classNames) {
+    classNames.forEach((className) => {
+      if (
+        className.tag === undefined &&
+        className.constructorName === undefined &&
+        className.className === undefined
+      ) {
+        this.registry.push({
+          tag: className.name,
+          constructorName: className.name.toLowerCase(),
+          className: className,
+        });
+      } else {
+        this.registry.push({
+          tag: className.tag || className.className.name,
+          constructorName: className.constructorName || className.className.name.toLowerCase(),
+          className: className.className || className.className,
+        });
+      }
+    });
+  }
 
   static bind(className, bindingMethod) {
     this.bindingMethods.push({
@@ -41,15 +64,18 @@ export default class Container {
   }
 
   static resolve(className) {
-    if (this.hasBindingMethod(className)) return this.resolveWithBindingMethod(className);
+    if (this.hasBindingMethod(className))
+      return this.resolveWithBindingMethod(className);
     if (this.isSingletone(className)) return this.resolveSingletone(className);
 
     return className.injectables?.length > 0
       ? new className(
           ...className.injectables.map((injectable) => {
-            if (this.hasBindingMethod(injectable)) return this.resolveWithBindingMethod(injectable);
-            if (this.isSingletone(injectable)) return this.resolveSingletone(injectable);
-            
+            if (this.hasBindingMethod(injectable))
+              return this.resolveWithBindingMethod(injectable);
+            if (this.isSingletone(injectable))
+              return this.resolveSingletone(injectable);
+
             return injectable.injectables?.length > 0
               ? Container.resolve(injectable)
               : new injectable();

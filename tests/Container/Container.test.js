@@ -7,8 +7,61 @@ import Teeth from "../../src/Stubs/Teeth.js";
 
 describe("Container", () => {
   beforeEach(() => {
+    Container.registry = [];
     Container.bindingMethods = [];
     Container.singletones = [];
+  });
+
+  it("can be registered a className", () => {
+    Container.register([Eye]);
+    expect(Container.registry[0]).toEqual({
+      tag: "Eye",
+      constructorName: "eye",
+      className: Eye,
+    });
+  });
+
+  it("can be registered object with specified tag", () => {
+    Container.register([
+      {
+        tag: "EyeTag",
+        className: Eye,
+      },
+    ]);
+    expect(Container.registry[0]).toEqual({
+      tag: "EyeTag",
+      constructorName: "eye",
+      className: Eye,
+    });
+  });
+
+  it("can be registered object with specified constructorName", () => {
+    Container.register([
+      {
+        constructorName: "eyeConstructorName",
+        className: Eye,
+      },
+    ]);
+    expect(Container.registry[0]).toEqual({
+      tag: "Eye",
+      constructorName: "eyeConstructorName",
+      className: Eye,
+    });
+  });
+
+  it("can be registered object with specified tag, constructorName", () => {
+    Container.register([
+      {
+        tag: "EyeTag",
+        constructorName: "eyeConstructorName",
+        className: Eye,
+      },
+    ]);
+    expect(Container.registry[0]).toEqual({
+      tag: "EyeTag",
+      constructorName: "eyeConstructorName",
+      className: Eye,
+    });
   });
 
   it("resolves instance with nested dependency injection", () => {
