@@ -12,7 +12,7 @@ describe("Container", () => {
     Container.singletones = [];
   });
 
-  it("can be registered a className", () => {
+  it("can be registered array of class", () => {
     Container.register([Eye]);
     expect(Container.registry[0]).toEqual({
       tag: "Eye",
@@ -21,7 +21,7 @@ describe("Container", () => {
     });
   });
 
-  it("can be registered object with specified tag", () => {
+  it("can be registered array of object with specified tag", () => {
     Container.register([
       {
         tag: "uniqueEye",
@@ -35,7 +35,7 @@ describe("Container", () => {
     });
   });
 
-  it("can be registered object with specified memberName", () => {
+  it("can be registered array of object with specified memberName", () => {
     Container.register([
       {
         memberName: "uniqueEyeMember",
@@ -49,7 +49,7 @@ describe("Container", () => {
     });
   });
 
-  it("can be registered object with specified tag, memberName", () => {
+  it("can be registered array of object with specified tag, memberName", () => {
     Container.register([
       {
         tag: "uniqueEye",
