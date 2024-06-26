@@ -17,7 +17,7 @@ describe("Container", () => {
     expect(Container.registry[0]).toEqual({
       tag: "Eye",
       memberName: "eye",
-      className: Eye,
+      class: Eye,
     });
   });
 
@@ -25,13 +25,13 @@ describe("Container", () => {
     Container.register([
       {
         tag: "uniqueEye",
-        className: Eye,
+        class: Eye,
       },
     ]);
     expect(Container.registry[0]).toEqual({
       tag: "uniqueEye",
       memberName: "eye",
-      className: Eye,
+      class: Eye,
     });
   });
 
@@ -39,13 +39,13 @@ describe("Container", () => {
     Container.register([
       {
         memberName: "uniqueEyeMember",
-        className: Eye,
+        class: Eye,
       },
     ]);
     expect(Container.registry[0]).toEqual({
       tag: "Eye",
       memberName: "uniqueEyeMember",
-      className: Eye,
+      class: Eye,
     });
   });
 
@@ -54,13 +54,13 @@ describe("Container", () => {
       {
         tag: "uniqueEye",
         memberName: "uniqueEyeMember",
-        className: Eye,
+        class: Eye,
       },
     ]);
     expect(Container.registry[0]).toEqual({
       tag: "uniqueEye",
       memberName: "uniqueEyeMember",
-      className: Eye,
+      class: Eye,
     });
   });
 

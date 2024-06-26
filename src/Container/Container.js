@@ -3,23 +3,23 @@ export default class Container {
   static bindingMethods = [];
   static singletones = [];
 
-  static register(classNames) {
-    classNames.forEach((className) => {
+  static register(array) {
+    array.forEach((item) => {
       if (
-        className.tag === undefined &&
-        className.memberName === undefined &&
-        className.className === undefined
+        item.tag === undefined &&
+        item.memberName === undefined &&
+        item.class === undefined
       ) {
         this.registry.push({
-          tag: className.name,
-          memberName: className.name.toLowerCase(),
-          className: className,
+          tag: item.name,
+          memberName: item.name.toLowerCase(),
+          class: item,
         });
       } else {
         this.registry.push({
-          tag: className.tag || className.className.name,
-          memberName: className.memberName || className.className.name.toLowerCase(),
-          className: className.className || className.className,
+          tag: item.tag || item.class.name,
+          memberName: item.memberName || item.class.name.toLowerCase(),
+          class: item.class || item.class,
         });
       }
     });
