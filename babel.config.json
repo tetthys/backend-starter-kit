@@ -6,5 +6,13 @@
         "modules": false // https://babeljs.io/docs/babel-preset-env#modules
       }
     ]
+  ],
+  "plugins": [
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "version": "2023-11" // https://babeljs.io/docs/babel-plugin-proposal-decorators#version
+      }
+    ]
   ]
 }
