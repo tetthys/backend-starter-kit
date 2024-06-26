@@ -26,6 +26,9 @@
     "ioredis": "^5.4.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.24.7",
+    "@babel/core": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
     "supertest": "^7.0.0",
     "vitest": "^1.6.0"
   }
