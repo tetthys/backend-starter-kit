@@ -1,4 +1,5 @@
 # backend-starter-kit
+
 backend starter kit with rich features!
 
 # What I aim for
@@ -8,6 +9,28 @@ backend starter kit with rich features!
 ## Booting
 
 ## Container
+
+```javascript
+class Head {
+  constructor(eye, nose, mouth) {
+    this.eye = eye;
+    this.nose = nose;
+    this.mouth = mouth;
+  }
+}
+
+it("resolves autowired instance", () => {
+  const head = Container.resolve(Head);
+  expect(head.eye).toBeInstanceOf(Eye);
+  expect(head.nose).toBeInstanceOf(Nose);
+  expect(head.mouth).toBeInstanceOf(Mouth);
+  expect(head.mouth.teeth).toBeInstanceOf(Teeth);
+});
+```
+
+No need to use decorator syntax or other.
+
+`Container` just inspect the class's constructor properties and inject them in its `registry`.
 
 ## Facade
 
