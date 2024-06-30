@@ -10,11 +10,10 @@ describe("Resolve", () => {
     Container.registry = [];
     Container.bindingMethods = [];
     Container.singletones = [];
+    Container.register([Head, Eye, Nose, Mouth, Teeth]);
   });
 
   it("resolves autowired instance #1", () => {
-    Container.register([Mouth, Teeth]);
-
     const mouth = Container.resolve(Mouth);
 
     expect(mouth).toBeInstanceOf(Mouth);
@@ -22,8 +21,6 @@ describe("Resolve", () => {
   });
 
   it("resolves autowired instance #2", () => {
-    Container.register([Head, Eye, Nose, Mouth, Teeth]);
-
     const head = Container.resolve(Head);
 
     expect(head.eye).toBeInstanceOf(Eye);
@@ -33,8 +30,6 @@ describe("Resolve", () => {
   });
 
   it("binds with bindingInfo using class", () => {
-    Container.register([Eye, Nose]);
-
     Container.bind({ class: Eye }, () => {
       return new Nose();
     });
@@ -44,8 +39,6 @@ describe("Resolve", () => {
   });
 
   it("binds with bindingInfo using tag", () => {
-    Container.register([Eye, Nose]);
-
     Container.bind({ tag: "Eye" }, () => {
       return new Nose();
     });
@@ -55,8 +48,6 @@ describe("Resolve", () => {
   });
 
   it("binds with bindingInfo using class in nested injection", () => {
-    Container.register([Head, Eye, Nose, Mouth, Teeth]);
-
     Container.bind({ class: Eye }, () => {
       return new Nose();
     });
@@ -69,8 +60,6 @@ describe("Resolve", () => {
   });
 
   it("binds with bindingInfo using tag in nested injection", () => {
-    Container.register([Head, Eye, Nose, Mouth, Teeth]);
-
     Container.bind({ tag: "Eye" }, () => {
       return new Nose();
     });
@@ -83,8 +72,6 @@ describe("Resolve", () => {
   });
 
   it("binds to singletone using class", () => {
-    Container.register([Nose]);
-
     Container.bindToSingletone({ class: Nose }, () => {
       return new Nose();
     });
@@ -95,8 +82,6 @@ describe("Resolve", () => {
   });
 
   it("binds to singletone using tag", () => {
-    Container.register([Nose]);
-
     Container.bindToSingletone({ tag: "Nose" }, () => {
       return new Nose();
     });
