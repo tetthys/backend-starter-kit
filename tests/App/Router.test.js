@@ -5,9 +5,15 @@ import Express from "../../src/Packages/Router/Express.js";
 
 describe("Router", () => {
   beforeEach(() => {
-    Container.bindToSingletone(Router, () => {
-      return new Express();
-    });
+    Container.register([Router]);
+    Container.bindToSingletone(
+      {
+        class: Router,
+      },
+      () => {
+        return new Express();
+      }
+    );
   });
 
   it("accept gets request", () => {
